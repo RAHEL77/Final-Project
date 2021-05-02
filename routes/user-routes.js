@@ -3,13 +3,9 @@ const userController=require ('../controllers/user-controller');
 
 
 const router=express.Router();
-router.get("/:id",(req,res)=>{
-    
-})
+router.get("/:userId", userController.getUser)
 
-router.get("/",(req,res)=>{
-    
-})
+router.get("/",userController.getUsers)
 
 router.put("/:id",(req,res)=>{
     

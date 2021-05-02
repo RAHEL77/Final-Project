@@ -39,4 +39,34 @@ const login = async (req, res) => {
   res.send();
 
 };
-module.exports={addUser,login}
+
+//get single user
+const getUser = async (req, res) => {
+    const {userId} = req.params;
+  
+    const existingUser = await UserModel.findOne({ _id: userId });
+    if (!existingUser) {
+      res.status(404);
+      res.json({ msg: "user not exist" });
+      res.send();
+      return;
+    }
+    
+    res.json({existingUser})
+    res.status(200);
+    res.send();
+  
+  };
+
+  //get single user
+const getUsers = async (req, res) => {
+  
+    const allUsers = await UserModel.find();
+       
+    res.json({allUsers})
+    res.status(200);
+    res.send();
+  
+  };
+
+module.exports={addUser,login,getUser,getUsers}
