@@ -20,7 +20,7 @@ const addUser = async (req, res) => {
 //login
 const login = async (req, res) => {
   const { email, password } = req.body;
-
+  console.log(email,password);
   const existingUser = await UserModel.findOne({ email: email });
   if (!existingUser) {
     res.status(403);
