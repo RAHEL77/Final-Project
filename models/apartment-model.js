@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const apartmentSchema = mongoose.Schema({
+const ApartmentSchema = mongoose.Schema({
   numOfApartment: {
     type: Number,
     required: true,
@@ -14,7 +14,7 @@ const apartmentSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
-  user:{
+  userId:{
     type:mongoose.Types.ObjectId,
     require:true,
     ref:"User"
