@@ -4,10 +4,10 @@ const ApartmentModel = require("../models/apartment-model");
 const updateApartment = async (req, res) => {
     const {apartmentId,numOfApartment,floor,sizeOfApartment,userId } = req.body;
     // apartment can be undifined or object 
-    const apartment = await AparmentModel.findOne({ _id: apartmentId });
+    const apartment = await ApartmentModel.findOne({ _id: apartmentId });
     if (!apartment) {
       res.status(404);
-      res.json({ msg: "apartment not exist" });
+      res.json({ msg: "apartment is not exist" });
       res.send();
       return;
     }
@@ -25,7 +25,7 @@ const updateApartment = async (req, res) => {
 const getApartment = async (req, res) => {
     const {apartmentId} = req.params;
     // apartment can be undifined or object 
-    const apartment = await AparmentModel.findOne({ _id: apartmentId });
+    const apartment = await ApartmentModel.findOne({ _id: apartmentId });
     if (!apartment) {
       res.status(404);
       res.json({ msg: "apartment not exist" });

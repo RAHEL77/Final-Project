@@ -5,10 +5,13 @@ const dotEnv=require('dotenv');
 const cors=require('cors');
 const userRoutes=require('./routes/user-routes');
 const apartmentRoutes=require('./routes/apartment-routes');
+// const bcrypt=require('bcrypt');
+// const jwt=require('jsonwebtoken');
 
 dotEnv.config();
 
 const app= express();
+// app.use(bodyParser.urlencoded({ extended: false }));
 //converts requests fields to js objects in req.body 
 app.use(bodyParser.json());
 app.use(cors());
