@@ -17,11 +17,10 @@ router.use("/",(req,res,next)=>{
     }
     next()
 })
-router.get("/:userId", userController.getUser)
 
-router.get("/",userController.getUsers)
+router.post("/login",userController.login)
 
-router.put("/",userController.updateUser)
+router.post("/register",userController.addUser)
 
 // router.delete("/:id",userController.deleteUser)
 

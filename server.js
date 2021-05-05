@@ -5,6 +5,8 @@ const dotEnv=require('dotenv');
 const cors=require('cors');
 const userRoutes=require('./routes/user-routes');
 const apartmentRoutes=require('./routes/apartment-routes');
+const authRoutes=require('./routes/auth-routes');
+const tokenAuthe=require('./middleware/token-auth');
 // const bcrypt=require('bcrypt');
 // const jwt=require('jsonwebtoken');
 
@@ -21,8 +23,8 @@ mongoose.connect(url,{useNewUrlParser: true, useUnifiedTopology: true }
     ).then(()=>{
     console.log("dbconnect");
 });
-
-
+app.use("/api/auth",authRoutes)
+app.use(tokenAuthe)
 app.use("/api/users",userRoutes)
 app.use("/api/apartments",apartmentRoutes)
 

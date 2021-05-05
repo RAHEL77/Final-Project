@@ -1,4 +1,6 @@
 const UserModel = require("../models/user-model");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 //update  user
 const updateUser = async (req, res) => {
@@ -31,7 +33,15 @@ const addUser = async (req, res) => {
     res.send();
     return;
   }
-  const newUser = new UserModel({ email,name,password });
+  let hashedPassword;
+  try{
+    hashedPassword=await bcrypt.hash(password,10) 
+  }catch(err){
+    res.status(400).send("invalid password")
+    return
+  }
+  //hashpassword to mongodb
+  const newUser = new UserModel({ email,name,password:hashedPassword });
   console.log(newUser);
   const createdUser =await newUser.save();
   res.status(201).json({createdUser});
@@ -51,29 +61,31 @@ const login = async (req, res) => {
     res.send();
     return;
   }
-  if (existingUser.password != password) {
+  let passwordMatch;
+  try{
+    passwordMatch= await bcrypt.compare(password,existingUser.password);
+  }catch(err){
+    //compare didnt understand this two values
+    res.status(503).send("server is busy please try again")
+    return
+  }
+  console.log(passwordMatch);
+  if (!passwordMatch) {
     res.status(403);
     res.json({ msg: "password incorrect" });
     res.send();
     return;
   }
-  res.json({existingUser})
+  const token =jwt.sign({userid:existingUser._id.toString(),email:existingUser.email}, 'Aatacr19bp',{expiresIn:'1h'})
+  res.json({token,user:{name:existingUser.name,email:existingUser.email,id:existingUser._id.toString()}});
+
   res.status(200);
   res.send();
 
 };
 
 
-// const isValid=await bcrypt.compare(password,user.password);
-// if (!isValid){
-//     res.status(403);
-//     res.send();
-//     return;
-// }
-// //מזהה שרת מזהה משתמש
-// const token =jwt.sign({userid:user._id.toString(),email:user.email}, 'Aatacr19bp',{expiresIn:'1h'})
-// res.json({token,user:{name:user.name,email:user.email,id:user._id.toString()}});
-// })
+
 
 
 //get single user
@@ -95,23 +107,6 @@ const getUser = async (req, res) => {
   };
 
 
-
-  // app.get('/users',async (req, res)=>{
-  //   if (!req.headers.authorization){
-  //       res.status(403);
-  //       res.send();
-  //       return;
-  //   }
-  //   console.log(req.headers.authorization);
-  //   try{
-  //       const token =req.headers.authorization.split(" ")[1];
-  //       const verify= jwt.verify(token,'Aatacr19bp')
-  //       console.log(verify);
-  //   }catch(err){
-  //       res.status(403);
-  //       res.send();
-  //       return;
-  //   }
 
 
   //get single user
