@@ -86,7 +86,25 @@ const login = async (req, res) => {
 
 
 
+//delete single user
+const deleteUser = async (req, res) => {
+  const {userId} = req.params;
 
+  const existingUser = await UserModel.findOne({ _id: userId });
+  if (!existingUser) {
+    res.status(404);
+    res.json({ msg: "user not exist" });
+    res.send();
+    return;
+  }
+  // await user.delete();
+  await user.remove();
+
+  res.json({existingUser})
+  res.status(200);
+  res.send();
+
+};
 
 //get single user
 const getUser = async (req, res) => {
@@ -120,4 +138,4 @@ const getUsers = async (req, res) => {
   
   };
 
-module.exports={addUser,login,getUser,getUsers,updateUser}
+module.exports={addUser,login,getUser,getUsers,updateUser,deleteUser}
