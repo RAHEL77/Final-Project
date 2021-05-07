@@ -14,6 +14,7 @@ module.exports = (req, res, next) => {
       res.status(403).send("missing token");
       return;
     }
+    //verify token is valid
     let payload=jwt.verify(token,"Aatacr19bp")
     console.log(payload);
     req.userId=payload.userId;

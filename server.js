@@ -5,6 +5,7 @@ const dotEnv=require('dotenv');
 const cors=require('cors');
 const userRoutes=require('./routes/user-routes');
 const apartmentRoutes=require('./routes/apartment-routes');
+const casesRoutes=require('./routes/cases-routes');
 const authRoutes=require('./routes/auth-routes');
 const tokenAuthe=require('./middleware/token-auth');
 // const bcrypt=require('bcrypt');
@@ -26,6 +27,7 @@ mongoose.connect(url,{useNewUrlParser: true, useUnifiedTopology: true }
 app.use("/api/auth",authRoutes)
 app.use(tokenAuthe)
 app.use("/api/users",userRoutes)
+app.use("/api/cases",casesRoutes)
 app.use("/api/apartments",apartmentRoutes)
 
 // console.log(process.env);

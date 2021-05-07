@@ -2,28 +2,7 @@ const UserModel = require("../models/user-model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-//update  user
-const updateUser = async (req, res) => {
-  const { email,name,password } = req.body;
-  // user can be undefined or object 
-  const user = await UserModel.findOne({ email: email });
-  if (!user) {
-    res.status(404);
-    res.json({ msg: "user not exist" });
-    res.send();
-    return;
-  }
-  user.name=name;
-  user.password=password;
-  await user.save();
-  res.json({user})
-  res.status(200);
-  res.send();
-
-};
-
-
-//create user
+//create user-REGISTER**
 const addUser = async (req, res) => {
   const { email,name,password } = req.body;
   const existingUser = await UserModel.findOne({ email: email });
@@ -48,9 +27,7 @@ const addUser = async (req, res) => {
   res.send();
 }
 
-
-
-//login
+//****Login
 const login = async (req, res) => {
   const { email, password } = req.body;
   console.log(email,password);
@@ -63,7 +40,7 @@ const login = async (req, res) => {
   }
   let passwordMatch;
   try{
-    passwordMatch= await bcrypt.compare(password,existingUser.password);
+    passwordMatch = await bcrypt.compare(password,existingUser.password);
   }catch(err){
     //compare didnt understand this two values
     res.status(503).send("server is busy please try again")
@@ -81,15 +58,32 @@ const login = async (req, res) => {
 
   res.status(200);
   res.send();
-
 };
 
+//update  user
+const updateUser = async (req, res) => {
+  const { email,name,password } = req.body;
+  // user can be undefined or object 
+  const user = await UserModel.findOne({ email: email });
+  if (!user) {
+    res.status(404);
+    res.json({ msg: "user not exist" });
+    res.send();
+    return;
+  }
+  user.name=name;
+  user.password=password;
+  await user.save();
+  res.json({user})
+  res.status(200);
+  res.send();
 
+};
 
 //delete single user
 const deleteUser = async (req, res) => {
   const {userId} = req.params;
-
+  console.log(userId);
   const existingUser = await UserModel.findOne({ _id: userId });
   if (!existingUser) {
     res.status(404);
@@ -97,10 +91,9 @@ const deleteUser = async (req, res) => {
     res.send();
     return;
   }
-  // await user.delete();
-  await user.remove();
+  await UserModel.deleteOne({_id:userId});
 
-  res.json({existingUser})
+  res.json({userId})
   res.status(200);
   res.send();
 
@@ -123,9 +116,6 @@ const getUser = async (req, res) => {
     res.send();
   
   };
-
-
-
 
   //get single user
 const getUsers = async (req, res) => {

@@ -1,26 +1,27 @@
 const mongoose = require("mongoose");
 
 const CasesSchema = mongoose.Schema({
-  IssueId: {
-    type: String,
-    required: true,
-    unique: true,
-    },
-  Description: {
+  description: {
     type: String,
     required: true,
   },
-  IsDone:{
+  isDone: {
     type: Boolean,
     required: true,
   },
-  MaintenanceSupplier:{
-    type:String,
-    require:false,
-  }
-  CostOfFix:{
-      type:Number,
-  }
+  maintenanceSupplier: {
+    type: mongoose.Types.ObjectId,
+    require: false,
+    ref: "User",
+  },
+  costOfFix: {
+    type: Number,
+  },
+  userId: {
+    type: mongoose.Types.ObjectId,
+    require: true,
+    ref: "User",
+  },
 });
 
-module.exports=mongoose.model("Cases",CasesSchema)
+module.exports = mongoose.model("Cases", CasesSchema);

@@ -23,6 +23,6 @@ router.get("/",userController.getUsers)
 
 router.put("/",userController.updateUser)
 
-// router.delete("/:id",userController.deleteUser)
+router.delete("/:userId",userController.deleteUser)
 
 module.exports=router
