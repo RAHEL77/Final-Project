@@ -24,4 +24,4 @@ const CasesSchema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Cases", CasesSchema);
+module.exports = mongoose.model("Case", CasesSchema);

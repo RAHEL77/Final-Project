@@ -5,16 +5,14 @@ const addBuilding = async (req, res) => {
   const {
     balance,
     addressOfBuilding,
-    chargeOfFixed,
-    chargeOfRegular,
+    charges,
     payments,
   } = req.body;
 
   const newBuilding = new BuildingModel({
     balance,
     addressOfBuilding,
-    chargeOfFixed,
-    chargeOfRegular,
+    charges,
     payments,
     // userId: req.userId,
   });
@@ -30,11 +28,9 @@ const updateBuilding = async (req, res) => {
     _id,
     balance,
     addressOfBuilding,
-    chargeOfFixed,
-    chargeOfRegular,
+    charges,
     payments,
-    userId,
-  } = req.body;
+    } = req.body;
   // building can be undifined or object-react has to send same field name =buildingId
   const building = await BuildingModel.findOne({ _id: _id });
   if (!building) {
@@ -46,8 +42,7 @@ const updateBuilding = async (req, res) => {
 
   building.balance = balance;
   building.addressOfBuilding = addressOfBuilding;
-  building.chargeOfFixed = chargeOfFixed;
-  building.chargeOfRegular = chargeOfRegular;
+  building.charges = charges;
   building.payments = payments;
 
   await building.save();

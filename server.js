@@ -8,8 +8,7 @@ const apartmentRoutes=require('./routes/apartment-routes');
 const casesRoutes=require('./routes/cases-routes');
 const buildingRoutes=require('./routes/building-routes');
 const paymentRoutes=require('./routes/payment-routes');
-const chargeOfRegularRoutes=require('./routes/chargeOfRegular-routes');
-const chargeOfFixesRoutes=require('./routes/chargeOfFixes-routes');
+const chargeRoutes=require('./routes/charge-routes');
 const authRoutes=require('./routes/auth-routes');
 const tokenAuthe=require('./middleware/token-auth');
 
@@ -36,8 +35,8 @@ app.use("/api/cases",casesRoutes)
 app.use("/api/apartments",apartmentRoutes)
 app.use("/api/payments",paymentRoutes)
 app.use("/api/building",buildingRoutes)
-app.use("/api/building",chargeOfRegularRoutes)
-app.use("/api/building",chargeOfFixesRoutes)
+app.use("/api/charge",chargeRoutes)
+// app.use("/api/building",chargeOfFixesRoutes)
 
 // console.log(process.env);
 

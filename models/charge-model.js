@@ -1,7 +1,12 @@
 const mongoose = require("mongoose");
-
-const chargeOfFixedSchema = mongoose.Schema({
-  dateOfPayment: {
+const chargeTypes= {
+  ELECTRICTY:"electricity",
+  WATER:"water",
+  GARDENING:"gardening",
+  FIX:"fix",
+}
+const chargeSchema = mongoose.Schema({
+  dateOfCharge: {
     type: Date,
     required: true,
   },
@@ -10,8 +15,9 @@ const chargeOfFixedSchema = mongoose.Schema({
     required: true,
   },
   caseOf:[ {
-    type: String,
+    type: mongoose.Types.ObjectId,
     require: true,
+    ref:"Case"
   }],
   payer:[ {
     type: mongoose.Types.ObjectId,
@@ -23,11 +29,11 @@ const chargeOfFixedSchema = mongoose.Schema({
     require: true,
     ref:"User"
   }],
-  typeOfPayment: {
-    type: mongoose.Types.ObjectId,
+  typeOfCharge: {
+    type: String,
     require: true,
-    ref:"Payment"
+    default:chargeTypes.WATER
   }
   });
 
-module.exports = mongoose.model("Fixed", chargeOfFixedSchema);
+module.exports = mongoose.model("Charge", chargeSchema);

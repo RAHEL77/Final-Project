@@ -10,19 +10,13 @@ const BuildingSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  chargeOfFixed:[ {
+  charges:[ {
     type: mongoose.Types.ObjectId,
     require: true,
-    ref:"Fixes"
+    ref:"Charge"
 
   }],
-  chargeOfRegular:[ {
-    type: mongoose.Types.ObjectId,
-    require: true,
-    ref:"Regular"
-
-  }],
-  payments:[ {
+   payments:[ {
     type: mongoose.Types.ObjectId,
     require: true,
     ref:"Payment"
