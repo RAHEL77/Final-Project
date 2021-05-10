@@ -19,6 +19,7 @@ const addApartment = async (req, res) => {
     userId,
   });
   const createdApartment = await newApartment.save();
+  console.log(createdApartment._id);
   res.json(createdApartment);
   res.status(201);
   res.send();

@@ -9,7 +9,7 @@ const CasesSchema = mongoose.Schema({
     type: Boolean,
     required: true,
   },
-  maintenanceSupplier: {
+  supplier: {
     type: mongoose.Types.ObjectId,
     require: false,
     ref: "User",
@@ -17,7 +17,7 @@ const CasesSchema = mongoose.Schema({
   costOfFix: {
     type: Number,
   },
-  userId: {
+  openedBy: {
     type: mongoose.Types.ObjectId,
     require: true,
     ref: "User",

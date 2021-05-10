@@ -6,8 +6,13 @@ const cors=require('cors');
 const userRoutes=require('./routes/user-routes');
 const apartmentRoutes=require('./routes/apartment-routes');
 const casesRoutes=require('./routes/cases-routes');
+const buildingRoutes=require('./routes/building-routes');
+const paymentRoutes=require('./routes/payment-routes');
+const chargeOfRegularRoutes=require('./routes/chargeOfRegular-routes');
+const chargeOfFixesRoutes=require('./routes/chargeOfFixes-routes');
 const authRoutes=require('./routes/auth-routes');
 const tokenAuthe=require('./middleware/token-auth');
+
 // const bcrypt=require('bcrypt');
 // const jwt=require('jsonwebtoken');
 
@@ -25,10 +30,14 @@ mongoose.connect(url,{useNewUrlParser: true, useUnifiedTopology: true }
     console.log("dbconnect");
 });
 app.use("/api/auth",authRoutes)
-app.use(tokenAuthe)
+// app.use(tokenAuthe)
 app.use("/api/users",userRoutes)
 app.use("/api/cases",casesRoutes)
 app.use("/api/apartments",apartmentRoutes)
+app.use("/api/payments",paymentRoutes)
+app.use("/api/building",buildingRoutes)
+app.use("/api/building",chargeOfRegularRoutes)
+app.use("/api/building",chargeOfFixesRoutes)
 
 // console.log(process.env);
 

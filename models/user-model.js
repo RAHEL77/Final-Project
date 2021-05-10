@@ -1,5 +1,10 @@
 const mongoose = require("mongoose");
-
+const userRoles= {
+  TENANT:"tenant",
+  ADMIN:"admin",
+  SUPPLIER:"supplier",
+  APP:"app",
+}
 const userSchema = mongoose.Schema({
   email: {
     type: String,
@@ -14,11 +19,11 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  apartments:[{
-    type:mongoose.Types.ObjectId,
-    require:true,
-    ref:"Apartment"
-  }]
+  userRole:{
+    type:String,
+    required:true,
+    default:userRoles.TENANT
+  }
 });
 
 module.exports=mongoose.model("User",userSchema)
