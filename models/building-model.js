@@ -21,6 +21,13 @@ const BuildingSchema = mongoose.Schema({
     require: true,
     ref:"Payment"
   }],
+   users:[ {
+    type: mongoose.Types.ObjectId,
+    require: true,
+    ref:"User"
+  }],
+
+
   });
 
 module.exports = mongoose.model("Building", BuildingSchema);

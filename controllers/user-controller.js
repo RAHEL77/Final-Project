@@ -118,9 +118,9 @@ const getUser = async (req, res) => {
   };
 
   //get single user
-const getUsers = async (req, res) => {
+const getUsers = async (req,res) => {
   
-    const allUsers = await UserModel.find();
+    const allUsers = await UserModel.find({});
        
     res.json({allUsers})
     res.status(200);

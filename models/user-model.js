@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const userRoles= {
+const UserRoles= {
   TENANT:"tenant",
   ADMIN:"admin",
   SUPPLIER:"supplier",
@@ -22,8 +22,8 @@ const userSchema = mongoose.Schema({
   userRole:{
     type:String,
     required:true,
-    default:userRoles.TENANT
+    default:UserRoles.TENANT
   }
 });
 
-module.exports=mongoose.model("User",userSchema)
+module.exports=mongoose.model("User",userSchema);
