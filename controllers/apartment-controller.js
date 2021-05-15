@@ -73,8 +73,7 @@ const getApartments = async (req, res) => {
   const allApartments = await ApartmentModel.find();
 
   res.json({ allApartments });
-  res.status(200);
-  res.send();
+  res.status(200).send();
 };
 
 module.exports = { getApartments, addApartment, getApartment, updateApartment };
