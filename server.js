@@ -36,7 +36,7 @@ app.use("/api/apartments",apartmentRoutes)
 app.use("/api/payments",paymentRoutes)
 app.use("/api/building",buildingRoutes)
 app.use("/api/charge",chargeRoutes)
-// app.use("/api/building",chargeOfFixesRoutes)
+// app.use("/api/building",charge)
 
 // console.log(process.env);
 
